@@ -1,7 +1,4 @@
--- ============================================================
---  ArsenalHub UI Library  v3.0
---  Cross-platform: PC / iOS / Android
--- ============================================================
+
 
 local HttpService      = game:GetService("HttpService")
 local TweenService     = game:GetService("TweenService")
@@ -374,7 +371,7 @@ function Library:Window(title, sizeOverride)
         local Page = new("ScrollingFrame", {
             Name="Page_"..tabName, BackgroundColor3=TH.pn, BackgroundTransparency=0,
             BorderSizePixel=0, Position=UDim2.new(0,0,0,0), Size=UDim2.new(1,0,1,0),
-            Visible=false, Active=true, ScrollBarThickness=3, ScrollBarImageColor3=TH.ac,
+            Visible=false, Active=true, ScrollBarThickness=3, ScrollBarImageColor3=WT,
             CanvasSize=UDim2.new(0,0,0,0)
         }, Content)
         local pgLayout = new("UIListLayout", {
@@ -822,7 +819,7 @@ function Library:Window(title, sizeOverride)
                     new("TextLabel", {
                         LayoutOrder=1, BackgroundTransparency=1, AutomaticSize=Enum.AutomaticSize.X,
                         Size=UDim2.new(0,0,1,0), Font=Enum.Font.GothamBold,
-                        Text=" "..curSel, TextColor3=TH.ac, TextSize=10
+                        Text=" "..curSel, TextColor3=WT, TextSize=10
                     }, tw2)
                     new("Frame", {LayoutOrder=3,BackgroundTransparency=1,Size=UDim2.new(0,3,1,0)}, tw2)
                     onTheme(function(t) tw(tw2,{BackgroundColor3=t.dk},0.22) end)
@@ -1003,7 +1000,7 @@ function Library:Window(title, sizeOverride)
                         new("TextLabel", {
                             LayoutOrder=1, BackgroundTransparency=1, AutomaticSize=Enum.AutomaticSize.X,
                             Size=UDim2.new(0,0,1,0), Font=Enum.Font.GothamBold,
-                            Text=" "..opt, TextColor3=TH.ac, TextSize=10
+                            Text=" "..opt, TextColor3=WT, TextSize=10
                         }, tw2)
                         new("Frame", {LayoutOrder=3,BackgroundTransparency=1,Size=UDim2.new(0,3,1,0)}, tw2)
                         onTheme(function(t) tw(tw2,{BackgroundColor3=t.dk},0.22) end)
@@ -1289,7 +1286,7 @@ function Library:Window(title, sizeOverride)
             local SLOT_KEYS   = {"ac","dk","bg","pn","sb","cd","su","br","sl"}
             local SLOT_LABELS = { ac="Accent", dk="Dark Button", bg="Background", pn="Panel", sb="Sidebar", cd="Card", su="Subtle", br="Border", sl="Slot Off" }
 
-            E.Section(self, "เลือกธีม")
+            E.Section(self, "Select Theme")
 
             local GridWrap = new("Frame", {
                 Name="ThemeGrid", BackgroundTransparency=1, BorderSizePixel=0,
@@ -1372,7 +1369,7 @@ function Library:Window(title, sizeOverride)
             for _, theme in ipairs(THEMES) do makeCard(GridWrap, theme, false) end
 
             -- Custom color editor
-            E.Section(self, "กำหนดสีเอง")
+            E.Section(self, "Custom Colors")
 
             local editTheme = {}; for k,v in pairs(TH) do editTheme[k]=v end; editTheme.name="Custom"
             local colorDefs = {}
@@ -1394,7 +1391,7 @@ function Library:Window(title, sizeOverride)
             local TitleBar2 = new("Frame", {BackgroundTransparency=1,BorderSizePixel=0,Size=UDim2.new(1,0,0,20)}, Outer2)
             local TitleTx2  = new("TextLabel", {
                 BackgroundTransparency=1, Position=UDim2.new(0,2,0,0), Size=UDim2.new(1,-52,1,0),
-                Font=Enum.Font.GothamBold, Text="สล็อตสี", TextColor3=TH.ac, TextSize=9, TextXAlignment=Enum.TextXAlignment.Left
+                Font=Enum.Font.GothamBold, Text="Color Slots", TextColor3=TH.ac, TextSize=9, TextXAlignment=Enum.TextXAlignment.Left
             }, TitleBar2)
             local TitleLine2 = new("Frame", {
                 BackgroundColor3=TH.br, BorderSizePixel=0, AnchorPoint=Vector2.new(0,1),
@@ -1404,7 +1401,7 @@ function Library:Window(title, sizeOverride)
                 BackgroundColor3=TH.sl, BorderSizePixel=0, AnchorPoint=Vector2.new(1,0.5),
                 Position=UDim2.new(1,0,1.8,0), Size=UDim2.new(0,44,0,25),
                 AutoButtonColor=false, Font=Enum.Font.GothamBold,
-                Text="แก้ไข", TextColor3=TH.su, TextSize=9
+                Text="Edit", TextColor3=TH.su, TextSize=9
             }, TitleBar2)
             corner(UDim.new(0,4), EditBtn2)
 
@@ -1571,12 +1568,12 @@ function Library:Window(title, sizeOverride)
             local function toggleEditMode()
                 editMode2 = not editMode2
                 if editMode2 then
-                    EditBtn2.Text="เสร็จ"; tw(EditBtn2,{BackgroundColor3=TH.dk,TextColor3=TH.ac},0.14)
+                    EditBtn2.Text="Done"; tw(EditBtn2,{BackgroundColor3=TH.dk,TextColor3=TH.ac},0.14)
                     Outer2:TweenSize(UDim2.new(1,-28,0,PH+4+listH2+4),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.28,true)
                     EditList2:TweenSize(UDim2.new(1,0,0,listH2),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.28,true)
                     elStroke2.Transparency=0
                 else
-                    EditBtn2.Text="แก้ไข"; tw(EditBtn2,{BackgroundColor3=TH.sl,TextColor3=TH.su},0.14)
+                    EditBtn2.Text="Edit"; tw(EditBtn2,{BackgroundColor3=TH.sl,TextColor3=TH.su},0.14)
                     selIdx=-1
                     for _,el in ipairs(rowEls2) do tw(el.row,{BackgroundTransparency=1},0.14); el.checkIco.TextTransparency=1; tw(el.selRing,{Transparency=1},0.14) end
                     Outer2:TweenSize(UDim2.new(1,-28,0,PH),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.24,true)
@@ -1603,7 +1600,7 @@ function Library:Window(title, sizeOverride)
             local ApplyBtn = new("TextButton", {
                 BackgroundColor3=TH.ac, BorderSizePixel=0, Size=UDim2.new(1,-28,0,30),
                 AutoButtonColor=false, Font=Enum.Font.GothamBold,
-                Text="✓  ใช้สีที่แก้ไข", TextColor3=Color3.new(1,1,1), TextSize=12
+                Text="✓  Apply Edited Colors", TextColor3=Color3.new(1,1,1), TextSize=12
             }, Page)
             corner(UDim.new(0,7),ApplyBtn)
             ApplyBtn.MouseButton1Down:Connect(function() tw(ApplyBtn,{Size=UDim2.new(1,-32,0,28)},0.08,Enum.EasingStyle.Sine) end)
@@ -1616,27 +1613,27 @@ function Library:Window(title, sizeOverride)
             onTheme(function(t) tw(ApplyBtn,{BackgroundColor3=t.ac},0.22) end)
 
             -- Custom grid
-            E.Section(self, "ธีมที่บันทึกไว้")
+            E.Section(self, "Saved Themes")
 
             local CGrid = new("Frame",{BackgroundTransparency=1,BorderSizePixel=0,Size=UDim2.new(1,-28,0,0),AutomaticSize=Enum.AutomaticSize.Y},Page)
             new("UIGridLayout",{CellSize=UDim2.new(0.31,0,0,52),CellPadding=UDim2.new(0,6,0,6),SortOrder=Enum.SortOrder.LayoutOrder},CGrid)
 
-            local EmptyLbl = new("TextLabel",{BackgroundTransparency=1,Size=UDim2.new(1,0,0,24),Font=Enum.Font.Gotham,Text="ยังไม่มีธีมที่บันทึก",TextColor3=TH.su,TextSize=10,Visible=#savedThemes==0},CGrid)
+            local EmptyLbl = new("TextLabel",{BackgroundTransparency=1,Size=UDim2.new(1,0,0,24),Font=Enum.Font.Gotham,Text="No Saved Themes",TextColor3=TH.su,TextSize=10,Visible=#savedThemes==0},CGrid)
             onTheme(function(t) tw(EmptyLbl,{TextColor3=t.su},0.22) end)
 
             for _, t in ipairs(savedThemes) do makeCard(CGrid,t,true); EmptyLbl.Visible=false end
 
             -- Save section
-            E.Section(self, "บันทึกธีม")
+            E.Section(self, "Save Theme")
 
             local NameWrap2 = new("Frame",{BackgroundTransparency=1,BorderSizePixel=0,Size=UDim2.new(1,-28,0,28)},Page)
-            local NameBox2 = new("TextBox",{BackgroundColor3=TH.cd,BorderSizePixel=0,Size=UDim2.new(0,230,1,0),Font=Enum.Font.Gotham,Text="",TextColor3=WT,TextSize=11,PlaceholderText="ชื่อธีม...",ClearTextOnFocus=false,ZIndex=3},NameWrap2)
+            local NameBox2 = new("TextBox",{BackgroundColor3=TH.cd,BorderSizePixel=0,Size=UDim2.new(0,230,1,0),Font=Enum.Font.Gotham,Text="",TextColor3=WT,TextSize=11,PlaceholderText="Theme Name...",ClearTextOnFocus=false,ZIndex=3},NameWrap2)
             corner(UDim.new(0,7),NameBox2)
             local nameStroke2 = stroke(TH.br,1,NameBox2)
             NameBox2.Focused:Connect(function() tw(nameStroke2,{Color=TH.ac,Thickness=1.5},0.12) end)
             NameBox2.FocusLost:Connect(function() tw(nameStroke2,{Color=TH.br,Thickness=1},0.12) end)
 
-            local SaveBtn2 = new("TextButton",{BackgroundColor3=TH.ac,BorderSizePixel=0,Size=UDim2.new(0,0,1,0),AutomaticSize=Enum.AutomaticSize.X,AutoButtonColor=false,Font=Enum.Font.GothamBold,Text="  ＋  บันทึกธีมนี้  ",TextColor3=WT,TextSize=12,Position=UDim2.new(0,240,0,0)},NameWrap2)
+            local SaveBtn2 = new("TextButton",{BackgroundColor3=TH.ac,BorderSizePixel=0,Size=UDim2.new(0,0,1,0),AutomaticSize=Enum.AutomaticSize.X,AutoButtonColor=false,Font=Enum.Font.GothamBold,Text="  ＋  Save Theme  ",TextColor3=WT,TextSize=12,Position=UDim2.new(0,240,0,0)},NameWrap2)
             corner(UDim.new(0,7),SaveBtn2)
             SaveBtn2.MouseButton1Down:Connect(function() tw(SaveBtn2,{TextTransparency=0.3},0.08) end)
             SaveBtn2.MouseButton1Click:Connect(function()
@@ -1657,5 +1654,4 @@ function Library:Window(title, sizeOverride)
     function W:Tab(...) return Tabs:Tab(...) end
     return W
 end
-
 return Library
